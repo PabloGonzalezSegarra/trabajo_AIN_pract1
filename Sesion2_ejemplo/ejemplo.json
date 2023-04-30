@@ -1,0 +1,21 @@
+{
+    "host": "gtirouter.dsic.upv.es",
+    "manager": "mpgonseg",
+    "service": "spgonseg",
+    "axis": [
+        {
+            "rank": "BDISoldier",
+            "name": "medic_axis_pgonseg",
+            "password": "secret",
+			"amount": 3
+        }
+    ],
+    "allied": [
+        {
+            "rank": "BDISoldier",
+            "name": "soldier_allied_pgonseg",
+            "password": "secret",
+            "amount": 3
+        }
+    ]
+}

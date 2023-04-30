@@ -1,0 +1,32 @@
+{
+    "host": "gtirouter.dsic.upv.es",
+    "manager": "mpgonseg",
+    "manager_password": "secret",
+    "service": "spgonseg",
+    "service_password": "secret",
+    "axis": [
+		{
+            "rank": "BDISoldier",
+            "name": "luchador_pgonseg",
+            "password": "secret",
+            "amount": 20,
+            "asl": "luchador.asl"
+        }
+    ],
+     "allied": [
+                {
+            "rank": "invencibleM.BDIMInvencible",
+            "name": "medic_pgosneg",
+            "password": "secret",
+            "amount": 1,
+            "asl": "medic_arena.asl"
+        }, 
+        {
+            "rank": "invencibleF.BDIFInvencible",
+            "name": "fieldop_pgonseg",
+            "password": "secret",
+            "amount": 3,
+            "asl": "fieldop_arena.asl"
+        }
+   ]
+  }
