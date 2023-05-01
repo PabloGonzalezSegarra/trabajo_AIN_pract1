@@ -87,46 +87,60 @@
   -movingP4;
   +movingP1.
 
++friends_in_fov(ID,Type,Angle,Distance,Health,Position): movingP1 & general_moving 
+<-
+?health(H);
+.shoot(5,Position);
+.print("Shooting to ", ID);
+if(Health > H & no_corro){
+  -no_corro;
+  -movingP1;
+  +movingP4;
+  .goto([245,0,127]);
+  .print("Running away to target 4");
+}.
+
+
++friends_in_fov(ID,Type,Angle,Distance,Health,Position): movingP2 & general_moving 
+<-
+?health(H);
+.shoot(5,Position);
+.print("Shooting to ", ID);
+if(Health > H & no_corro){
+  -no_corro;
+  -movingP2;
+  +movingP1;
+  .goto( [127,0,9]);
+  .print("Running away to target 1");
+}.
+
++friends_in_fov(ID,Type,Angle,Distance,Health,Position): movingP3 & general_moving 
+<-
+?health(H);
+.shoot(5,Position);
+.print("Shooting to ", ID);
+if(Health > H & no_corro){
+  -no_corro;
+  -movingP3;
+  +movingP2;
+  .goto([9,0,127]);
+  .print("Running away to target 2");
+}.
+
++friends_in_fov(ID,Type,Angle,Distance,Health,Position): movingP4 & general_moving 
+<-
+?health(H);
+.shoot(5,Position);
+.print("Shooting to ", ID);
+if(Health > H & no_corro){
+  -no_corro;
+  -movingP4;
+  +movingP3;
+  .goto([127,0,245]);
+  .print("Running away to target 3");
+}.
+
 +friends_in_fov(ID,Type,Angle,Distance,Health,Position)
 <-
-  .print("Shooting to friend with id: ", ID);
-  ?health(H);
-  .shoot(5,Position);
-  if (Health >= H)  {
-    if(no_corro & general_moving){
-      if (movingP1 & general_moving) {
-          .print("Friend in pov with more heal, going back to target 4");
-          -movingP1;
-          +movingP4;
-          -no_corro;
-          .goto([245,0,127]);
-      }else{
-        if(movingP2 & general_moving){
-          .print("Friend in pov with more heal, going back to target 1");
-          -movingP2;
-          +movingP1;
-          -no_corro;
-          .goto([127,0,9]);
-        }else{
-          if(movingP3 & general_moving){
-            .print("Friend in pov with more heal, going back to target 2");
-            -movingP3;
-            +movingP2;
-            -no_corro;
-            .goto([9,0,127]);
-          }else{
-            if(movingP4 & general_moving){
-              .print("Friend in pov with more heal, going back to target 3");
-              -movingP4;
-              +movingP3;
-              -no_corro;
-              .goto([127,0,245]);
-            }else{
-              .print("Unknow state");
-            }
-          }
-        }
-      }
-    }
-  }.
-
+.print("Shooting to ", ID);
+.shoot(5,Position).
