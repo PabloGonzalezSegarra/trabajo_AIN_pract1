@@ -1,5 +1,6 @@
-//EJEMPLO LUCHADOR 
-
+/* 
+ * @Authors: Pablo González Segarra & Carles Carbonell Sales
+*/
 +flag(F): team(200)
   <-
   .create_control_points(F,100,3,C);
