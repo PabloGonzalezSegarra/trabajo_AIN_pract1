@@ -7,7 +7,8 @@
   +movingP1;
   +general_moving;
   +free;
-  .print("M oving to target 1");
+  +no_corro;
+  .print("Moving to target 1");
   .goto([127,0,9]).
   
 +health(H): H<=45 & free
@@ -32,7 +33,7 @@
   +free;
   +general_moving.
   
-+ammo(H): H<=45 & free
++ammo(H): H<=35 & free
   <-
   +aporammo;
   -free;
@@ -58,6 +59,7 @@
   <-
   .print("Reached target 1, moving to target 2");
   .goto([9,0,127]);
+  +no_corro;
   -movingP1;
   +movingP2.
 
@@ -65,6 +67,7 @@
   <-
   .print("Reached target 2, moving to target 3");
   .goto([127,0,245]);
+  +no_corro;
   -movingP2;
   +movingP3.
 
@@ -72,6 +75,7 @@
   <-
   .print("Reached target 3, moving to target 4");
   .goto([245,0,127]);
+  +no_corro;
   -movingP3;
   +movingP4.
 
@@ -79,76 +83,53 @@
   <-
   .print("Reached target 4, moving to target 1");
   .goto([127,0,9]);
+  +no_corro;
   -movingP4;
   +movingP1.
 
- /*  En modo arena no hace falta disparar al enemigo  
-  +enemies_in_fov(ID,Type,Angle,Distance,Health,Position)
-  <-
-  .shoot(3,Position).
-*/
++friends_in_fov(ID,Type,Angle,Distance,Health,Position)
+<-
+  .print("Friend in pov");
+  ?health(H);
   
-  +friends_in_fov(ID,Type,Angle,Distance,Health,Position)
-  <- 
-  .print("Friends in pov, shooting 5 shots");
-  .shoot(5,Position).
- 
- /*  En modo arena no hace falta disparar al enemigo  
-  +enemies_in_fov(ID,Type,Angle,Distance,Health,Position): movingP1 & Health > health(X)
-  <-
-  -movingP1;
-  +movingP4;
-  .goto([127,0,9]).
-*/
-  
-  +friends_in_fov(ID,Type,Angle,Distance,Health,Position): movingP1 & Health > health(X) & general_moving
-  <-
-  .print("Friend in pov with more heal, going back to target 4");
-  -movingP1;
-  +movingP4;
-  .goto([127,0,9]).
- 
- /*  En modo arena no hace falta disparar al enemigo  
-  +enemies_in_fov(ID,Type,Angle,Distance,Health,Position): movingP2 & Health > health(X)
-  <-
-  -movingP2;
-  +movingP1;
-  .goto([245,0,127]).
-*/
-  
-  +friends_in_fov(ID,Type,Angle,Distance,Health,Position): movingP2 & Health > health(X) & general_moving
-  <-
-  .print("Friend in pov with more heal, going back to target 1");
-  -movingP2;
-  +movingP1;
-  .goto([245,0,127]).
- 
- /*  En modo arena no hace falta disparar al enemigo  
-  +enemies_in_fov(ID,Type,Angle,Distance,Health,Position): movingP3 & Health > health(X)
-  <-
-  -movingP3;
-  +movingP2;
-  .goto([9,0,127]).
-*/
-  
-  +friends_in_fov(ID,Type,Angle,Distance,Health,Position): movingP3 & Health > health(X) & general_moving
-  <-
-  .print("Friend in pov with more heal, going back to target 2");
-  -movingP3;
-  +movingP2;
-  .goto([9,0,127]).
- 
- /*  En modo arena no hace falta disparar al enemigo  
-  +enemies_in_fov(ID,Type,Angle,Distance,Health,Position): movingP4 & Health > health(X)
-  <-
-  -movingP4;
-  +movingP3;
-  .goto([9,0,127]).
-*/
-  
-  +friends_in_fov(ID,Type,Angle,Distance,Health,Position): movingP4 & Health > health(X) & general_moving
-  <-
-  .print("Friend in pov with more heal, going back to target 3");
-  -movingP4;
-  +movingP3;
-  .goto([9,0,127]).
+  if (Health < H)  {
+    .print("Friends in pov, shooting 5 shots");
+    .shoot(5,Position);
+  } else { 
+    if(no_corro & general_moving){
+      if (movingP1 & general_moving) {
+          .print("Friend in pov with more heal, going back to target 4");
+          -movingP1;
+          +movingP4;
+          -no_corro;
+          .goto([127,0,9]);
+      }else{
+        if(movingP2 & general_moving){
+          .print("Friend in pov with more heal, going back to target 1");
+          -movingP2;
+          +movingP1;
+          -no_corro;
+          .goto([245,0,127]);
+        }else{
+          if(movingP3 & general_moving){
+            .print("Friend in pov with more heal, going back to target 2");
+            -movingP3;
+            +movingP2;
+            -no_corro;
+            .goto([9,0,127]);
+          }else{
+            if(movingP4 & general_moving){
+              .print("Friend in pov with more heal, going back to target 3");
+              -movingP4;
+              +movingP3;
+              -no_corro;
+              .goto([9,0,127]);
+            }else{
+              .print("Unknow state");
+            }
+          }
+        }
+      }
+    }
+  }.
+
