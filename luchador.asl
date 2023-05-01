@@ -91,11 +91,8 @@
 <-
   .print("Friend in pov");
   ?health(H);
-  
-  if (Health < H)  {
-    .print("Friends in pov, shooting 5 shots");
-    .shoot(5,Position);
-  } else { 
+  .shoot(5,Position);
+  if (Health >= H)  {
     if(no_corro & general_moving){
       if (movingP1 & general_moving) {
           .print("Friend in pov with more heal, going back to target 4");
