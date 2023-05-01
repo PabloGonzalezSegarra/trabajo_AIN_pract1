@@ -89,7 +89,7 @@
 
 +friends_in_fov(ID,Type,Angle,Distance,Health,Position)
 <-
-  .print("Friend in pov");
+  .print("Shooting to friend with id: ", ID);
   ?health(H);
   .shoot(5,Position);
   if (Health >= H)  {
@@ -99,14 +99,14 @@
           -movingP1;
           +movingP4;
           -no_corro;
-          .goto([127,0,9]);
+          .goto([245,0,127]);
       }else{
         if(movingP2 & general_moving){
           .print("Friend in pov with more heal, going back to target 1");
           -movingP2;
           +movingP1;
           -no_corro;
-          .goto([245,0,127]);
+          .goto([127,0,9]);
         }else{
           if(movingP3 & general_moving){
             .print("Friend in pov with more heal, going back to target 2");
@@ -120,7 +120,7 @@
               -movingP4;
               +movingP3;
               -no_corro;
-              .goto([9,0,127]);
+              .goto([127,0,245]);
             }else{
               .print("Unknow state");
             }
