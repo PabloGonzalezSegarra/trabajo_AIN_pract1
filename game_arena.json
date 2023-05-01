@@ -9,8 +9,15 @@
             "rank": "BDISoldier",
             "name": "luchador_pgonseg",
             "password": "secret",
-            "amount": 20,
+            "amount": 1,
             "asl": "luchador.asl"
+        },
+        {
+            "rank": "BDISoldier",
+            "name": "dummy_pgonseg",
+            "password": "secret",
+            "amount": 10,
+            "asl": "dummy.asl"
         }
     ],
      "allied": [
